@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>mod-viz example</title>
+<style>
+	* {
+		font-family: monospace;
+	}
+	body {
+		display: flex;
+		flex-direction: column;
+		width: 100vw;
+		height: 100vh;
+		margin: 0;
+		padding: 0;
+		color: #888;
+		background: #222;
+	}
+	header {
+		text-align: center;
+		margin: 1rem;
+	}
+	mod-viz {
+		background: black;
+	}
+</style>
+<script type="module" src="mod-viz.js"></script>
+</head>
+<body>
+	<header>press <button onclick="playMod('/test.xm')">play</button> on page</header>
+	<mod-viz></mod-viz>
+</body>
+<script type="module">
+	import colormaker from "./color-maker.js";
+	const modviz = document.querySelector("mod-viz");
+	modviz.onModScan = scan => {
+		let colors = {};
+		colormaker.numColors = scan.playedInstruments.length;
+		scan.playedInstruments.sort((a,b)=>a-b).forEach((inst, index) => {
+			colors[inst] = colormaker.create(index);
+		});
+		modviz.setInstrumentColors(colors);
+		modviz.play();
+	}
+	modviz.onPlayState = state => {
+		if (state.playEnd) {
+			modviz.pause();
+		}
+	}
+</script>
+<script>
+	const modviz = document.querySelector("mod-viz");
+	function playMod (path)
+	{
+		modviz.load(path);
+	}
+</script>
+</html>

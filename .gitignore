@@ -1,0 +1,6 @@
+openmpt
+libopenmpt.js
+favicon.ico
+
+# TODO remove when we dont need firefix
+mod-player.js
