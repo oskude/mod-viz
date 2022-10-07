@@ -6,6 +6,8 @@ The "test" visuals [`note_grid.frag`](note_grid.frag) draws "note dots" on a gri
 
 The hard-work is done by [libopenmpt](https://lib.openmpt.org/libopenmpt/) - much love!
 
+Demo at https://modviz.org
+
 ## Dependencies
 
 - [*nix?](https://en.wikipedia.org/wiki/Unix-like)
